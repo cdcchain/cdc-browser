@@ -1,0 +1,553 @@
+@CHARSET "UTF-8";
+
+/*公共部分css*/
+
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+select {
+	margin: 0;
+	padding: 0;
+}
+
+
+/*body{font:1.3em px "lth_GBK",HELVETICA;background:#f7f6f9;-webkit-text-size-adjust:100%;color:#2a2727;padding: 0px 0 0 0;min-width: 300px;}*/
+
+img {
+	-weblit-touch-callout: none;
+	/* 禁止移动端图片被保存或拷贝 */
+}
+
+input,
+textarea {
+	-webkit-user-select: text;
+	-webkit-tap-highlight-color: transparent;
+}
+
+* {
+	/* -webkit-text-emphasis-position: rgba(0,0,0,0); */
+	/*IOS端去除高亮*/
+	-webkit-tap-highlight-color：rgba(0, 0, 0, 0);
+	/*IOS端去除高亮*/
+	/*禁止用户选择页面文字*/
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: #cccccc;
+	font-size: 1.6rem;
+	border: none;
+	position: relative;
+	bottom: 0.1rem;
+}
+
+.user-select-none {
+	-webkit-user-select: none;
+	/*禁止用户选择页面文字*/
+}
+
+/*@font-face {
+	font-family: "iconfont";
+	src: url('iconfont/iconfont.eot?t=1471834777');
+	!* IE9*!
+	src: url('iconfont/iconfont.eot?t=1471834777#iefix') format('embedded-opentype'), !* IE6-IE8 *!
+	url('iconfont/iconfont.woff?t=1471834777') format('woff'), !* chrome, firefox *!
+	url('iconfont/iconfont.ttf?t=1471834777') format('truetype'), !* chrome, firefox, opera, Safari, Android, iOS 4.2+*!
+	url('iconfont/iconfont.svg?t=1471834777#iconfont') format('svg');
+	!* iOS 4.1- *!
+}*/
+
+a {
+	text-decoration: none;
+	color: #00ccff;
+	cursor:pointer;
+}
+
+a:link {
+	/*color: rgb(0,195,171);*/
+	color:#00ccff;
+}
+a:visited {
+	color:#00ccff;
+}
+a:hover {
+	color: #FF0000;
+}
+a:active {
+	color:#00ccff;
+}
+
+em {
+	font-style: normal
+}
+
+li {
+	list-style: none;
+}
+
+img {
+	border: 0;
+	vertical-align: middle
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+
+/* p{word-wrap:break-word} */
+
+a img {
+	border: 0;
+}
+
+
+/*浮动*/
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.pfb0 {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+.posr {
+	position: relative;
+}
+
+
+/*内边距*/
+
+.pa0 {
+	padding: 0;
+}
+
+.pa1rem {
+	padding: 1rem;
+}
+
+.pa2rem {
+	padding: 2rem;
+}
+
+.pb0 {
+	padding-bottom: 0;
+}
+
+.pat15rem {
+	padding-top: 1.5rem;
+}
+
+.pab15rem {
+	padding-bottom: 1.5rem;
+}
+
+
+/*外边距*/
+
+.ma0 {
+	margin: 0;
+}
+
+.ma {
+	margin: auto;
+}
+
+.mt15em {
+	margin-top: 1.5rem;
+}
+
+.mt5em {
+	margin-top: 0.5rem;
+}
+
+.mt9em {
+	margin-top: 0.9rem;
+}
+
+
+/*字体大小*/
+
+.fwb {
+	font-weight: bold;
+}
+
+.fwn {
+	font-weight: 100;
+}
+
+
+/*宽度高度*/
+
+.w100 {
+	width: 100%;
+}
+
+.h100 {
+	height: 100%;
+}
+
+
+/*鼠标悬停手势*/
+
+.cp {
+	cursor: pointer;
+}
+
+
+/*背景图定位*/
+
+.bpxl {
+	background-position-x: left
+}
+
+.bpxr {
+	background-position-x: right
+}
+
+.bpxc {
+	background-position-x: center
+}
+
+/*.bpyl {
+	background-position-y: left
+}
+
+.bpyl {
+	background-position-y: right
+}*/
+
+.bpyl {
+	background-position-y: center
+}
+
+.brn {
+	background-repeat: no-repeat;
+}
+
+
+/*对齐方式*/
+
+.tac {
+	text-align: center;
+}
+
+.tal {
+	text-align: left;
+}
+
+.tar {
+	text-align: right;
+}
+
+
+/**/
+
+.dib {
+	display: inline-block;
+}
+
+.dn,
+.hide {
+	display: none;
+}
+
+.db {
+	display: block;
+}
+
+
+/*边框线*/
+
+.bs1 {
+	border: 1px solid;
+}
+
+.bs0 {
+	border: none;
+}
+
+.vh {
+	visibility: hidden;
+}
+
+.vv {
+	visibility: visible;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.oh {
+	overflow: hidden;
+	position: relative;
+}
+
+.oa {
+	overflow: auto;
+	position: relative;
+}
+
+.os {
+	overflow: scroll;
+	position: relative;
+}
+
+.container {
+	margin: 0;
+	padding: 0;
+	padding-bottom:60px;
+}
+
+.commonhead {
+	width: 100%;
+	height: 103px;
+	padding-left: 10%;
+	background-color: #293237;
+}
+
+.commonheadtitle {
+	width: 100%;
+	height: 103px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.commonheadlogo {
+	width: 12%;
+	height: 85px;
+   /* background-image: url(../img/logo.png);
+	background-repeat: no-repeat;*/
+	float: left;
+	margin-top:10px;
+}
+.zhuye{
+	width: 9%;
+	height: 60px;
+	font-size: 20px;
+	float: left;
+	cursor:pointer;
+	margin-left:5%;
+	padding-top: 40px;
+	text-align: center;
+	margin-left: 0;
+}
+.heyue{
+	width:11%;
+	height: 60px;
+	background-image: url(../img/heyue.png);
+	background-repeat: no-repeat;
+	float: left;
+	cursor:pointer;
+}
+.zhongwen{
+	float: right;
+	width: 15%;
+	height: 60px;
+/*	background-image: url(../img/zhongwen.png);*/
+	background-repeat: no-repeat;
+	cursor:pointer;
+}
+
+.commonmain{
+	width: 100%;
+	height: 100%;
+	padding-right:10%;
+}
+
+.contentmain{
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tradedetail{
+	width: 75px;
+	height: 20px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.tradeidtable{
+	width: 95%;
+	height: 10%;
+	float:right;
+	padding-left:3%
+}
+
+.ywzt{
+	font-weight: 200;
+	font-family: 'arial narrow';
+}
+
+.boldtr
+{
+	font-weight:bold;
+	color:#00ccff;
+}
+
+.rmb{
+	float: right;
+	font-weight:bold;
+}
+
+.tradedetailtable
+{
+	width: 100%;
+	height: auto;
+    padding-left:10%  
+}
+
+.theadbg{
+	background-color: rgb(227,233,247);
+	height: 50px;
+	width: 100%;
+}
+
+.tradedetailtable tbody tr
+{
+	height: 50px;
+	font-size: 85%;
+	font-family: 'SimHei';
+	text-align:left;
+}
+
+.tradedetailtable tbody tr td
+{
+	padding-left: 10px;
+}
+
+.trbg{
+	background-color:#f5f7fc;
+}
+
+.commonfoot{
+	position:fixed;
+	bottom:0;
+	width: 100%;
+	height: 50px;
+	background-image: url(../img/footbg.png);
+	background-repeat: repeat-x repeat-y;
+}
+.commonfoottitle {
+	width: 100%;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'arial narrow';
+	padding-top: 15px;
+	padding-left:9%;
+}
+
+.titleHref {
+	color: rgb(24,116,205);
+}
+
+.kuan input{ 
+	width: 75%; 
+	height: 50px; 
+	float: left;
+	border:none;
+	background-color:#293237;
+	color:#fff;
+	margin-left:30px;
+	margin-top: 3px;
+	outline: 0;
+}	
+.search-div {
+    height: 60px;
+    width: 40%;
+    border: 2px solid #ffffff;
+    border-radius: 60px 60px 60px 60px;
+    float:left;
+    margin-top: 25px;
+    margin-left: 20%;
+}
+.an input{
+	width:40px;
+	height:40px;
+	background-image: url(../img/search1.png);
+	background-repeat: no-repeat;
+	border:none;
+	float:left;
+	cursor:pointer;
+	margin-top: 5px;
+	margin-left: 10px;
+	background-color: #00ccff;
+	color:#FFFFFF;
+	text-align: center;
+}
+
+.tradedetail{
+	width: 180px;
+	height: 20px;
+	background-repeat: no-repeat;
+	float: left;
+}
+.tradedetail2{
+	width: 120px;
+	height: 20px;
+	background-repeat: no-repeat;
+	float: left;
+	font-family: '微软雅黑';
+}
+
+.active{
+	color:#00ccff;
+}
+
+.noactive{
+	color:#FFFFFF;
+}
+
+.contract-search{
+	width:60%;
+	margin-left: 10%;
+	padding-top: 20px;
+	height: 90px;
+}
+
+.commonmain-block{
+	width: 100%;
+	height: 100%;
+	padding-right:10%;
+}
+
+.text-blue{
+	color: #00ccff;
+}
+

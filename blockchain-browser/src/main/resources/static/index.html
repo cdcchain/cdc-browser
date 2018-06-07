@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>CDC-区块链浏览器</title>
+		<link rel="shortcut icon" href="favicon.png" />
+		<link rel="stylesheet" href="css/common.css?v1.3" />
+		<link rel="stylesheet" href="css/mainpage.css" />
+
+		<script type="text/javascript" src="ui/amaze/js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</head>
+	<body class="container">
+		<div class="commonhead">
+			<div class="commonheadtitle">
+				<div class="commonheadlogo">
+					<img src="img/logo.png"/>
+				</div>
+				<a href="/"><div class="zhuye active">首页</div></a>
+				<a href="/contract"><div class="zhuye noactive">合约</div></a>
+				<div class="search-div">
+					<form action="" method="get">
+						<div class="kuan"><input name="" id="formInput" type="text" /></div>
+						<span style="background-image: url(img/search1.png);float: left;height:40px;width:40px;
+						margin-left:60px;margin-top:8px;cursor:pointer" onclick="search();"></span>
+					</form>
+				</div>
+				<div class="zhongwen"></div>
+				
+			</div>
+		</div>
+		<div class="commonmain">
+			<div class="contentmain">
+				<div class="tradeidtable" style="width: 100%;height:100px; text-align: center; font-family: '微软雅黑';">
+					<table width="100%">
+						<tr style="line-height: 50px; font-size: 90%;">
+							<td width="20%">交易总量</td>
+							<td width="20%" class="leftsolid">总交易金额</td>
+							<td width="20%" class="leftsolid">总手续费</td>
+							<td width="20%" class="leftsolid">当前一小时交易量</td>
+							<td width="20%" class="leftsolid">交易峰值每小时</td>
+						</tr>
+						<tr class="text-blue">
+							<td id="transCount">0</td>
+							<td id="transAmount" class="leftsolid">0</td>
+							<td id="transFee" class="leftsolid">0.00</td>
+							<td id="transAveHour" class="leftsolid">0</td>
+							<td id="maxHourCount" class="leftsolid">0</td>
+						</tr>
+					</table>
+				</div>
+				<div class="tradedetailtable">
+					<table width="100%">
+						<thead>
+							<tr class="mainpagetheadbg">
+      							<th width="16.6%">高度</th>
+    							<th width="16.6%">时间</th>
+    							<th width="16.6%">交易数</th>
+    							<th width="16.6%">交易额</th>
+    							<th width="16.6%">产块代理</th>
+    							<th width="16.6%">大小 (Byte)</th>
+							</tr>
+						</thead>
+						<tbody id="blocks">
+						</tbody>
+					</table>
+				</div>
+				<div style="width: 100%; height: 50px;">
+				</div>
+				<div class="tradedetailtable" style="min-height: 400px;">
+					<table width="100%" style="float: left;">
+						<thead>
+							<tr class="mainpagetheadbg">
+      							<th width="40%">最近交易记录</th>
+    							<th width="40%"></th>
+    							<th width="20%"></th>
+							</tr>
+						</thead>
+						<tbody id="transactions">
+
+						</tbody>
+					</table>
+ 				</div>
+			</div>
+		</div>
+<!--		<div class="commonfoot">
+			<div class="commonfoottitle">
+				business@thinkyoung.com.cn
+			</div>
+		</div>-->
+		
+
+	</body>
+</html>

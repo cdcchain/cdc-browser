@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblContractInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.browser.dao.entity.TblContractInfo" >
+    <id column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="hash" property="hash" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="owner_address" property="ownerAddress" jdbcType="VARCHAR" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="reg_time_str" property="regTimeStr" jdbcType="VARCHAR" />
+    <result column="reg_trx_id" property="regTrxId" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="asset_id" property="assetId" jdbcType="INTEGER" />
+    <result column="block_num" property="blockNum" jdbcType="BIGINT" />
+    <result column="precision" property="precision" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.browser.dao.entity.TblContractInfo" extends="BaseResultMap" >
+    <result column="bytecode" property="bytecode" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contract_id, `name`, hash, owner, owner_address, owner_name, description, reg_time,
+    reg_trx_id, balance, status,asset_id,block_num,`precision`
+  </sql>
+  <sql id="Blob_Column_List" >
+    bytecode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />,DATE_FORMAT(reg_time, '%Y-%m-%d %H:%i:%S') as reg_time_str
+    from tbl_contract_info
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbl_contract_info
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.browser.dao.entity.TblContractInfo" >
+    insert into tbl_contract_info (contract_id, name, hash, 
+      owner, owner_address, owner_name, 
+      description, reg_time, reg_trx_id, 
+      balance, status, bytecode,asset_id,block_num
+      )
+    values (#{contractId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{hash,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{ownerAddress,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{regTime,jdbcType=TIMESTAMP}, #{regTrxId,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{bytecode,jdbcType=LONGVARCHAR}, #{assetId,jdbcType=INTEGER}, #{blockNum,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblContractInfo" >
+    insert into tbl_contract_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="hash != null" >
+        hash,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="ownerAddress != null" >
+        owner_address,
+      </if>
+      <if test="ownerName != null" >
+        owner_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="regTrxId != null" >
+        reg_trx_id,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="bytecode != null" >
+        bytecode,
+      </if>
+      <if test="assetId != null" >
+        asset_id,
+      </if>
+      <if test="blockNum != null" >
+        block_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="hash != null" >
+        #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAddress != null" >
+        #{ownerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regTrxId != null" >
+        #{regTrxId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bytecode != null" >
+        #{bytecode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assetId != null" >
+        #{assetId,jdbcType=INTEGER},
+      </if>
+      <if test="blockNum != null" >
+        #{blockNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblContractInfo" >
+    update tbl_contract_info
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="hash != null" >
+        hash = #{hash,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAddress != null" >
+        owner_address = #{ownerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regTrxId != null" >
+        reg_trx_id = #{regTrxId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bytecode != null" >
+        bytecode = #{bytecode,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assetId != null" >
+        asset_id = #{assetId,jdbcType=INTEGER},
+      </if>
+      <if test="blockNum != null" >
+        block_num = #{blockNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.browser.dao.entity.TblContractInfo" >
+    update tbl_contract_info
+    set name = #{name,jdbcType=VARCHAR},
+      hash = #{hash,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      owner_address = #{ownerAddress,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
+      reg_trx_id = #{regTrxId,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      bytecode = #{bytecode,jdbcType=LONGVARCHAR},
+      asset_id = #{assetId,jdbcType=INTEGER},
+      block_num = #{blockNum,jdbcType=BIGINT}
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblContractInfo" >
+    update tbl_contract_info
+    set name = #{name,jdbcType=VARCHAR},
+      hash = #{hash,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      owner_address = #{ownerAddress,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
+      reg_trx_id = #{regTrxId,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      asset_id = #{assetId,jdbcType=INTEGER}，
+      block_num = #{blockNum,jdbcType=BIGINT}
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectContractList" resultMap="BaseResultMap" parameterType="com.browser.dao.entity.TblContractInfo" >
+    select
+    <include refid="Base_Column_List" />,DATE_FORMAT(reg_time, '%Y-%m-%d %H:%i:%S') as reg_time_str
+    from tbl_contract_info
+    where 1=1
+    <if test="hash != null" >
+     AND hash = #{hash,jdbcType=VARCHAR}
+    </if>
+    <if test="owner != null" >
+      AND owner = #{owner,jdbcType=VARCHAR}
+    </if>
+    <if test="ownerAddress != null" >
+      AND owner_address = #{ownerAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="ownerName != null" >
+      AND owner_name = #{ownerName,jdbcType=VARCHAR}
+    </if>
+    <if test="regTrxId != null" >
+      AND  reg_trx_id = #{regTrxId,jdbcType=VARCHAR}
+    </if>
+    <if test="balance != null" >
+    AND  balance = #{balance,jdbcType=BIGINT}
+  </if>
+    <if test="status != null" >
+      AND status = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="blockNum != null" >
+      AND  block_num = #{blockNum,jdbcType=BIGINT}
+    </if>
+    <if test="keyword != null and keyword!=''" >
+      AND (`name` = #{keyword,jdbcType=VARCHAR} or contract_id = #{keyword,jdbcType=VARCHAR})
+    </if>
+  </select>
+
+  <delete id="deleteByBlockNum" parameterType="java.lang.Long" >
+    delete from tbl_contract_info
+    where block_num = #{blockNum,jdbcType=BIGINT}
+  </delete>
+</mapper>

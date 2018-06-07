@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title>GDW-区块链浏览器</title>
+		<link rel="shortcut icon" href="favicon.png" />
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- <link rel="stylesheet" href="css/mainpage.css" /> -->
+
+		<script type="text/javascript" src="ui/amaze/js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</head>
+	<body class="container">
+		<div class="commonhead">
+			<div class="commonheadtitle">
+				<div class="commonheadlogo">
+					<img src="img/logo2.png"/>
+				</div>
+				<a href="/"><div class="zhuye">首页</div></a>
+				<a href="/contract"><div class="zhuye noactive">合约</div></a>
+				<!-- <div class="zhongwen"></div> -->
+				<div class="search">
+					<form action="" method="get">
+						<div class="kuan"><input name="" id="formInput" type="text" /></div><!--搜索框-->
+						<div class="an"><input name="" type="button" onclick="search();"/></div><!--搜索按钮-->
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="commonmain">
+			<div class="contentmain">
+				<div class="tradeidtable">
+					<table width="100%">
+						<tr>
+							<td width="20%"><img src="img/2.png" alt="" /><span>交易总量</span></td>
+							<td width="20%" class="leftsolid"><img src="img/4.png" alt="" /><span>总交易金额</span></td>
+							<td width="20%" class="leftsolid"><img src="img/5.png" alt="" /><span>总手续费</span></td>
+							<td width="20%" class="leftsolid"><img src="img/3.png" alt="" /><span>当前一小时交易量</span></td>
+							<td width="20%" class="leftsolid"><img src="img/1.png" alt="" /><span>交易峰值每小时</span></td>
+						</tr>
+						<tr class="text-blue">
+							<td id="transCount">0</td>
+							<td id="transAmount">0</td>
+							<td id="transFee">0.00</td>
+							<td id="transAveHour">0</td>
+							<td id="maxHourCount">0</td>
+						</tr>
+					</table>
+				</div>
+				<div class="tradedetailtable" style="min-height: 400px;">
+					<table width="100%">
+						<thead>
+							<tr class="mainpagetheadbg">
+      							<th width="40%" style="text-align:left;">最近交易记录</th>
+    							<th width="40%"></th>
+    							<th width="20%"></th>
+							</tr>
+						</thead>
+						<tbody id="transactions"></tbody>
+					</table>
+
+				</div>
+				<div class="tradedetailtable">
+					<table width="100%">
+						<thead>
+							<tr class="mainpagetheadbg">
+      							<th width="10%">高度</th>
+    							<th width="23.2%">时间</th>
+    							<th width="16.6%">交易数</th>
+    							<th width="16.6%">交易额</th>
+    							<th width="16.6%">产块代理</th>
+    							<th width="16.6%">大小 (Byte)</th>
+							</tr>
+						</thead>
+						<tbody id="blocks"></tbody>
+					</table>
+				</div>
+
+
+			</div>
+		</div>
+<!--底部-->
+<div class="footer">
+    <div class="content">
+    <div class="row" style="    padding: 2.5em 0;">
+        <div class="col-md-6 col-xs-12">
+            <div class="row">
+                <div class="col-md-4 col-xs-6"><img src="img/cn.png" alt="" /><a href="https://t.me/GDW2018" target="_blank">中文电报群</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/Twitter.png" alt="" /><a href="https://twitter.com/goldenworld2018" target="_blank">Twitter</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/ghihub.png" alt="" /><a href="https://github.com/GDW2018" target="_blank">Github</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/en.png" alt="" /><a href="https://t.me/GoldenWorld2018" target="_blank">英文电报群</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/Facebook.png" alt="" /><a href="https://www.facebook.com/goldenworld2018" target="_blank">Facebook</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/xing.png" alt="" /><a href="https://t.zsxq.com/QBE6U7Q" target="_blank">知识星球</a></div>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <ul>
+                <li><img src="img/kf.png" alt="" /><span>GDW官方客服微信</span></li>
+                <li><img src="img/gz.png" alt="" /><span>GDW官方微信公众号</span></li>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+        <div class="clear"></div> 
+        <p>版權©2018  GOLDEN WORLD FOUNDATIONA，版權所有</p>
+    </div>
+</div>
+
+	</body>
+</html>

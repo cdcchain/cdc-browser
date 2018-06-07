@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblBcTransactionExMapper" >
+  <resultMap id="BaseResultMap" type="com.browser.dao.entity.TblBcTransactionEx" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="trx_id" property="trxId" jdbcType="VARCHAR" />
+    <result column="orig_trx_id" property="origTrxId" jdbcType="VARCHAR" />
+    <result column="from_acct" property="fromAcct" jdbcType="VARCHAR" />
+    <result column="from_addr" property="fromAddr" jdbcType="VARCHAR" />
+    <result column="to_acct" property="toAcct" jdbcType="VARCHAR" />
+    <result column="to_addr" property="toAddr" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="trx_time" property="trxTime" jdbcType="TIMESTAMP" />
+    <result column="trx_type" property="trxType" jdbcType="INTEGER" />
+    <result column="asset_id" property="assetId" jdbcType="INTEGER" />
+    <result column="block_num" property="blockNum" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.browser.dao.entity.TblBcTransactionEx" extends="BaseResultMap" >
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, trx_id, orig_trx_id, from_acct, from_addr, to_acct, to_addr, amount, fee, trx_time, 
+    trx_type,asset_id,block_num
+  </sql>
+  <sql id="Blob_Column_List" >
+    memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_bc_transaction_ex
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_bc_transaction_ex
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.browser.dao.entity.TblBcTransactionEx" >
+    insert into tbl_bc_transaction_ex (id, trx_id, orig_trx_id, 
+      from_acct, from_addr, to_acct, 
+      to_addr, amount, fee, 
+      trx_time, trx_type, memo,asset_id,block_num
+      )
+    values (#{id,jdbcType=BIGINT}, #{trxId,jdbcType=VARCHAR}, #{origTrxId,jdbcType=VARCHAR}, 
+      #{fromAcct,jdbcType=VARCHAR}, #{fromAddr,jdbcType=VARCHAR}, #{toAcct,jdbcType=VARCHAR}, 
+      #{toAddr,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, #{fee,jdbcType=BIGINT}, #{trxTime,jdbcType=TIMESTAMP},
+       #{trxType,jdbcType=INTEGER}, #{memo,jdbcType=LONGVARCHAR}, #{assetId,jdbcType=INTEGER}, #{blockNum,jdbcType=BIGINT}
+      )
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tbl_bc_transaction_ex (id, trx_id, orig_trx_id,
+    from_acct, from_addr, to_acct,
+    to_addr, amount, fee,
+    trx_time, trx_type, memo,asset_id,block_num
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.trxId,jdbcType=VARCHAR}, #{item.origTrxId,jdbcType=VARCHAR},
+      #{item.fromAcct,jdbcType=VARCHAR}, #{item.fromAddr,jdbcType=VARCHAR}, #{item.toAcct,jdbcType=VARCHAR},
+      #{item.toAddr,jdbcType=VARCHAR}, #{item.amount,jdbcType=BIGINT}, #{item.fee,jdbcType=BIGINT},
+      #{item.trxTime,jdbcType=TIMESTAMP}, #{item.trxType,jdbcType=INTEGER}, #{item.memo,jdbcType=LONGVARCHAR},#{item.assetId,jdbcType=VARCHAR},
+      #{item.blockNum,jdbcType=BIGINT}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblBcTransactionEx" >
+    insert into tbl_bc_transaction_ex
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trxId != null" >
+        trx_id,
+      </if>
+      <if test="origTrxId != null" >
+        orig_trx_id,
+      </if>
+      <if test="fromAcct != null" >
+        from_acct,
+      </if>
+      <if test="fromAddr != null" >
+        from_addr,
+      </if>
+      <if test="toAcct != null" >
+        to_acct,
+      </if>
+      <if test="toAddr != null" >
+        to_addr,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="trxTime != null" >
+        trx_time,
+      </if>
+      <if test="trxType != null" >
+        trx_type,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="assetId != null" >
+        asset_id,
+      </if>
+      <if test="blockNum != null" >
+        block_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="trxId != null" >
+        #{trxId,jdbcType=VARCHAR},
+      </if>
+      <if test="origTrxId != null" >
+        #{origTrxId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAcct != null" >
+        #{fromAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAddr != null" >
+        #{fromAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="toAcct != null" >
+        #{toAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="toAddr != null" >
+        #{toAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="trxTime != null" >
+        #{trxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trxType != null" >
+        #{trxType,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assetId != null" >
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        #{blockNum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblBcTransactionEx" >
+    update tbl_bc_transaction_ex
+    <set >
+      <if test="trxId != null" >
+        trx_id = #{trxId,jdbcType=VARCHAR},
+      </if>
+      <if test="origTrxId != null" >
+        orig_trx_id = #{origTrxId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAcct != null" >
+        from_acct = #{fromAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAddr != null" >
+        from_addr = #{fromAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="toAcct != null" >
+        to_acct = #{toAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="toAddr != null" >
+        to_addr = #{toAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="trxTime != null" >
+        trx_time = #{trxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trxType != null" >
+        trx_type = #{trxType,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="assetId != null" >
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        block_num = #{blockNum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.browser.dao.entity.TblBcTransactionEx" >
+    update tbl_bc_transaction_ex
+    set trx_id = #{trxId,jdbcType=VARCHAR},
+      orig_trx_id = #{origTrxId,jdbcType=VARCHAR},
+      from_acct = #{fromAcct,jdbcType=VARCHAR},
+      from_addr = #{fromAddr,jdbcType=VARCHAR},
+      to_acct = #{toAcct,jdbcType=VARCHAR},
+      to_addr = #{toAddr,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      fee = #{fee,jdbcType=BIGINT},
+      trx_time = #{trxTime,jdbcType=TIMESTAMP},
+      trx_type = #{trxType,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=LONGVARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      block_num = #{blockNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblBcTransactionEx" >
+    update tbl_bc_transaction_ex
+    set trx_id = #{trxId,jdbcType=VARCHAR},
+      orig_trx_id = #{origTrxId,jdbcType=VARCHAR},
+      from_acct = #{fromAcct,jdbcType=VARCHAR},
+      from_addr = #{fromAddr,jdbcType=VARCHAR},
+      to_acct = #{toAcct,jdbcType=VARCHAR},
+      to_addr = #{toAddr,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      fee = #{fee,jdbcType=BIGINT},
+      trx_time = #{trxTime,jdbcType=TIMESTAMP},
+      trx_type = #{trxType,jdbcType=INTEGER},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      block_num = #{blockNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByOrigTrxId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tbl_bc_transaction_ex
+    where orig_trx_id = #{origTrxId,jdbcType=VARCHAR}
+    order by trx_time desc
+  </select>
+
+  <delete id="deleteByBlockNum" parameterType="java.lang.Long" >
+    delete from tbl_bc_transaction_ex
+    where block_num = #{blockNum,jdbcType=BIGINT}
+  </delete>
+</mapper>

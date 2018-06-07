@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblBcBlockMapper" >
+  <resultMap id="blockResult" type="com.browser.dao.entity.TblBcBlock" >
+    <id column="block_id" property="blockId" jdbcType="VARCHAR" />
+    <result column="block_num" property="blockNum" jdbcType="BIGINT" />
+    <result column="block_size" property="blockSize" jdbcType="BIGINT" />
+    <result column="previous" property="previous" jdbcType="VARCHAR" />
+    <result column="trx_digest" property="trxDigest" jdbcType="VARCHAR" />
+    <result column="prev_secret" property="prevSecret" jdbcType="VARCHAR" />
+    <result column="next_secret_hash" property="nextSecretHash" jdbcType="VARCHAR" />
+    <result column="random_seed" property="randomSeed" jdbcType="VARCHAR" />
+    <result column="signee" property="signee" jdbcType="VARCHAR" />
+    <result column="block_time" property="blockTime" jdbcType="TIMESTAMP" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="deleted_at" property="deletedAt" jdbcType="TIMESTAMP" />
+
+    <result column="trx_num" property="trxNum" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+  </resultMap>
+ 
+
+  <sql id="Base_Column_List" >
+    block_id, block_num, block_size, previous, trx_digest, prev_secret, next_secret_hash, 
+    random_seed, signee, block_time,trx_num,amount
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="blockResult" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bc_block
+    where block_id = #{blockId,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 查询快表是否有数据 -->
+  <select id="queryByCount" resultType="java.lang.Integer">
+  	SELECT COUNT(a.block_id) AS num FROM tbl_bc_block a
+  </select>
+  
+  <!-- 获取最大的快号 -->
+  <select id="queryBlockNum" resultType="java.lang.Long">
+  	SELECT MAX(a.block_num) AS num FROM tbl_bc_block a
+  </select>
+  
+  <!-- 根据快号查询快的信息 -->
+  <select id="selectByBlockNum" resultMap="blockResult" parameterType="java.lang.Long">
+  	 select 
+    <include refid="Base_Column_List" />
+    from tbl_bc_block
+    where block_num = #{blockNum}
+  </select>
+  
+  <!-- 查询最新是快数据并展示 -->
+  <select id="selectByNewData" resultMap="blockResult">
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM tbl_bc_block a ORDER BY a.block_time DESC LIMIT 0,6
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbl_bc_block
+    where block_id = #{blockId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.browser.dao.entity.TblBcBlock" >
+    insert into tbl_bc_block (block_id, block_num, block_size, 
+      previous, trx_digest, prev_secret, 
+      next_secret_hash, random_seed, signee, 
+      block_time, created_at, updated_at, 
+      deleted_at,trx_num,amount)
+    values (#{blockId,jdbcType=VARCHAR}, #{blockNum,jdbcType=BIGINT}, #{blockSize,jdbcType=BIGINT}, 
+      #{previous,jdbcType=VARCHAR}, #{trxDigest,jdbcType=VARCHAR}, #{prevSecret,jdbcType=VARCHAR}, 
+      #{nextSecretHash,jdbcType=VARCHAR}, #{randomSeed,jdbcType=VARCHAR}, #{signee,jdbcType=VARCHAR}, 
+      #{blockTime,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{trxNum,jdbcType=INTEGER}, #{amount,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tbl_bc_block (block_id, block_num, block_size,
+    previous, trx_digest, prev_secret,
+    next_secret_hash, random_seed, signee,
+    block_time, created_at, updated_at,
+    deleted_at,trx_num,amount)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.blockId,jdbcType=VARCHAR}, #{item.blockNum,jdbcType=BIGINT}, #{item.blockSize,jdbcType=BIGINT},
+      #{item.previous,jdbcType=VARCHAR}, #{item.trxDigest,jdbcType=VARCHAR}, #{item.prevSecret,jdbcType=VARCHAR},
+      #{item.nextSecretHash,jdbcType=VARCHAR}, #{item.randomSeed,jdbcType=VARCHAR}, #{item.signee,jdbcType=VARCHAR},
+      #{item.blockTime,jdbcType=TIMESTAMP}, #{item.createdAt,jdbcType=TIMESTAMP}, #{item.updatedAt,jdbcType=TIMESTAMP},
+      #{item.deletedAt,jdbcType=TIMESTAMP}, #{item.trxNum,jdbcType=INTEGER}, #{item.amount,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblBcBlock" >
+    insert into tbl_bc_block
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blockId != null" >
+        block_id,
+      </if>
+      <if test="blockNum != null" >
+        block_num,
+      </if>
+      <if test="blockSize != null" >
+        block_size,
+      </if>
+      <if test="previous != null" >
+        previous,
+      </if>
+      <if test="trxDigest != null" >
+        trx_digest,
+      </if>
+      <if test="prevSecret != null" >
+        prev_secret,
+      </if>
+      <if test="nextSecretHash != null" >
+        next_secret_hash,
+      </if>
+      <if test="randomSeed != null" >
+        random_seed,
+      </if>
+      <if test="signee != null" >
+        signee,
+      </if>
+      <if test="signeeTime != null" >
+        block_time,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blockId != null" >
+        #{blockId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        #{blockNum,jdbcType=BIGINT},
+      </if>
+      <if test="blockSize != null" >
+        #{blockSize,jdbcType=BIGINT},
+      </if>
+      <if test="previous != null" >
+        #{previous,jdbcType=VARCHAR},
+      </if>
+      <if test="trxDigest != null" >
+        #{trxDigest,jdbcType=VARCHAR},
+      </if>
+      <if test="prevSecret != null" >
+        #{prevSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="nextSecretHash != null" >
+        #{nextSecretHash,jdbcType=VARCHAR},
+      </if>
+      <if test="randomSeed != null" >
+        #{randomSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="signee != null" >
+        #{signee,jdbcType=VARCHAR},
+      </if>
+      <if test="signeeTime != null" >
+        #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblBcBlock" >
+    update tbl_bc_block
+    <set >
+      <if test="blockNum != null" >
+        block_num = #{blockNum,jdbcType=BIGINT},
+      </if>
+      <if test="blockSize != null" >
+        block_size = #{blockSize,jdbcType=BIGINT},
+      </if>
+      <if test="previous != null" >
+        previous = #{previous,jdbcType=VARCHAR},
+      </if>
+      <if test="trxDigest != null" >
+        trx_digest = #{trxDigest,jdbcType=VARCHAR},
+      </if>
+      <if test="prevSecret != null" >
+        prev_secret = #{prevSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="nextSecretHash != null" >
+        next_secret_hash = #{nextSecretHash,jdbcType=VARCHAR},
+      </if>
+      <if test="randomSeed != null" >
+        random_seed = #{randomSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="signee != null" >
+        signee = #{signee,jdbcType=VARCHAR},
+      </if>
+      <if test="signeeTime != null" >
+        block_time = #{blockTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where block_id = #{blockId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblBcBlock" >
+    update tbl_bc_block
+    set block_num = #{blockNum,jdbcType=BIGINT},
+      block_size = #{blockSize,jdbcType=BIGINT},
+      previous = #{previous,jdbcType=VARCHAR},
+      trx_digest = #{trxDigest,jdbcType=VARCHAR},
+      prev_secret = #{prevSecret,jdbcType=VARCHAR},
+      next_secret_hash = #{nextSecretHash,jdbcType=VARCHAR},
+      random_seed = #{randomSeed,jdbcType=VARCHAR},
+      signee = #{signee,jdbcType=VARCHAR},
+      block_time = #{blockTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP}
+    where block_id = #{blockId,jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteByBlockNum" parameterType="java.lang.Long" >
+    delete from tbl_bc_block
+    where block_num = #{blockNum,jdbcType=BIGINT}
+  </delete>
+  
+</mapper>

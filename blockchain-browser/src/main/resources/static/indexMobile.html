@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+        <meta name="viewport"
+                content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<title>GDW-区块链浏览器</title>
+		<link rel="shortcut icon" href="favicon.png" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script type="text/javascript" src="js/index.js"></script>
+	</head>
+	<body>
+        <div class="top_box">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#" style="    padding: 10px 0 0;"><img src="img/logo2.png" alt="" /></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">合约</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+            <h1>GDW区块链浏览器</h1>
+            <h2>提供区块、交易、账户等查询功能</h2>
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="..."  placeholder="区块高度、区块哈希、交易ID、地址">
+                </input>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" aria-label="Help"><img src="img/icon2.png" alt="" /></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 内容 -->
+        <div class="container">
+              <table width="100%" class="tradedetailtable h35">
+                <thead>
+                    <tr class="mainpagetheadbg">
+                        <th colspan="3">最近交易记录</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions" width="100%">
+                    <tr>
+                        <td width="25%"><a >130491</a></td>
+                        <td width="45%">20 second </td>
+                        <td width="30%">15000 GDW</td>
+                    </tr>
+                    <tr class="trbg">
+                        <td><a >130491</a></td>
+                        <td>30 second </td>
+                        <td>6000 GDW</td>
+                    </tr>
+                    <tr>
+                        <td><a >130491</a></td>
+                        <td>1 minutes </td>
+                        <td>6923 GDW</td>
+                    </tr>
+                    <tr class="trbg">
+                        <td><a >130491</a></td>
+                        <td>1 minutes 20 second </td>
+                        <td>1 GDW</td>
+                    </tr>
+                    <tr>
+                        <td><a >130491</a></td>
+                        <td>1 minutes 50 second 1 minutes 50 second</td>
+                        <td>6000 GDW</td>
+                    </tr>
+                    <tr class="trbg">
+                        <td><a >130491</a></td>
+                        <td>1 minutes 50 second </td>
+                        <td>91000 GDW</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right;"><a href="">更多</a><img src="img/icon3.png" alt="" /></td>
+                    </tr>
+                </tbody>
+              </table>
+              <div class="h60">
+                    <table width="100%" class="tradedetailtable bold_th">
+                        <tr class="trbg">
+                            <th width="50%">高度</th>
+                            <td width="50%"><a href="">54545454</a></td>
+                        </tr>
+                        <tr ><th>时间</th><td>2018-12-20</td></tr>
+                        <tr class="trbg"><th>交易数</th><td>0</td></tr>
+                        <tr ><th>交易额</th><td>6000 GDW</td></tr>
+                        <tr class="trbg"><th>产块代理</th><td>gdw3</td></tr>
+                        <tr ><th>大小</th><td>111</td></tr>
+                    </table>
+
+                    <table width="100%" class="tradedetailtable h20 bold_th">
+                        <tr class="trbg">
+                            <th width="50%">高度</th>
+                            <td width="50%"><a href="">54545454</a></td>
+                        </tr>
+                        <tr ><th>时间</th><td>2018-12-20</td></tr>
+                        <tr class="trbg"><th>交易数</th><td>0</td></tr>
+                        <tr ><th>交易额</th><td>6000 GDW</td></tr>
+                        <tr class="trbg"><th>产块代理</th><td>gdw3</td></tr>
+                        <tr ><th>大小</th><td>111</td></tr>
+                    </table>
+
+                    <table width="100%" class="tradedetailtable h20 bold_th">
+                        <tr class="trbg">
+                            <th width="50%">高度</th>
+                            <td width="50%"><a href="">54545454</a></td>
+                        </tr>
+                        <tr ><th>时间</th><td>2018-12-20</td></tr>
+                        <tr class="trbg"><th>交易数</th><td>0</td></tr>
+                        <tr ><th>交易额</th><td>6000 GDW</td></tr>
+                        <tr class="trbg"><th>产块代理</th><td>gdw3</td></tr>
+                        <tr ><th>大小</th><td>111</td></tr>
+                        <tr style="border-top:1px solid #eee"><td></td><td style="text-align: right;"><a href="">更多</a><img src="img/icon3.png" alt="" /></td></tr>
+                    </table>
+              </div>
+        </div>
+
+
+
+        <!--底部-->
+        <div class="footer ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/cn.png" alt="" />
+                            <a href="https://t.me/GDW2018" target="_blank">中文电报群</a>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/Twitter.png" alt="" />
+                            <a href="https://twitter.com/goldenworld2018" target="_blank">Twitter</a>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/ghihub.png" alt="" />
+                            <a href="https://github.com/GDW2018" target="_blank">Github</a>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/en.png" alt="" />
+                            <a href="https://t.me/GoldenWorld2018" target="_blank">英文电报群</a>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/Facebook.png" alt="" />
+                            <a href="https://www.facebook.com/goldenworld2018" target="_blank">Facebook</a>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6">
+                            <img src="img/xing.png" alt="" />
+                            <a href="https://t.zsxq.com/QBE6U7Q" target="_blank">知识星球</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xs-12">
+                        <div class="col-md-4 col-xs-6"><img src="img/kf.png" alt="" /><span>GDW官方客服微信</span></div>
+                        <div class="col-md-4 col-xs-6"><img src="img/gz.png" alt="" /><span>GDW官方微信公众号</span></div>
+                    </div>
+                </div>
+                <p>版權©2018  GOLDEN WORLD FOUNDATIONA，版權所有</p>
+            </div>
+        </div>
+
+
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </body>
+</html>

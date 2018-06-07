@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblContractAbiMapper" >
+  <resultMap id="BaseResultMap" type="com.browser.dao.entity.TblContractAbi" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="abi_name" property="abiName" jdbcType="VARCHAR" />
+    <result column="block_num" property="blockNum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, contract_id, abi_name,block_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_contract_abi
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_contract_abi
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.browser.dao.entity.TblContractAbi" >
+    insert into tbl_contract_abi (id, contract_id, abi_name,block_num
+      )
+    values (#{id,jdbcType=INTEGER}, #{contractId,jdbcType=VARCHAR}, #{abiName,jdbcType=VARCHAR}, #{blockNum,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tbl_contract_abi (id, contract_id, abi_name,block_num)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.contractId,jdbcType=VARCHAR}, #{item.abiName,jdbcType=VARCHAR}, #{item.blockNum,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblContractAbi" >
+    insert into tbl_contract_abi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="abiName != null" >
+        abi_name,
+      </if>
+      <if test="blockNum != null" >
+        block_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="abiName != null" >
+        #{abiName,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        #{blockNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblContractAbi" >
+    update tbl_contract_abi
+    <set >
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="abiName != null" >
+        abi_name = #{abiName,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        block_num = #{blockNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblContractAbi" >
+    update tbl_contract_abi
+    set contract_id = #{contractId,jdbcType=VARCHAR},
+      abi_name = #{abiName,jdbcType=VARCHAR},
+      block_num = #{blockNum,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectListByContractId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tbl_contract_abi
+    where contract_id = #{contractId,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByBlockNum" parameterType="java.lang.Long" >
+    delete from tbl_contract_abi
+    where block_num = #{blockNum,jdbcType=BIGINT}
+  </delete>
+</mapper>

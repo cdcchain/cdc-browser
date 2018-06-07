@@ -1,0 +1,84 @@
+.leftsolid{
+	border-left: 2px solid #CCCCCC;
+}
+
+.mainpagetheadbg{
+	background-color: #e1e6f2;
+	height: 40px;
+	width: 100%;
+	text-align:left;
+	font-size: 95%; 
+	font-family: '微软雅黑'; 
+	font-weight: bold;
+}
+
+.mainpagetheadbg th{
+	padding-left: 10px;
+}
+
+.searcharea
+{
+	float: left;
+}
+
+/*
+  * 外面盒子样式---自己定义
+  */
+
+.page_div {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 15px;
+	font-family: "microsoft yahei";
+	color: #666666;
+	margin-right: 10px;
+	padding-left: 20px;
+	box-sizing: border-box;
+	text-align: right;
+}
+/*
+ * 页数按钮样式
+ */
+
+.page_div a {
+	min-width: 30px;
+	height: 28px;
+	border: 1px solid #dce0e0!important;
+	text-align: center;
+	margin: 0 4px;
+	cursor: pointer;
+	line-height: 28px;
+	color: #666666;
+	font-size: 13px;
+	display: inline-block;
+}
+
+#firstPage,
+#lastPage {
+	width: 50px;
+	color: #00ccff;
+	border: 1px solid #00ccff!important;
+}
+
+#prePage,
+#nextPage {
+	width: 70px;
+	color: #00ccff;
+	border: 1px solid #00ccff!important;
+}
+
+.page_div .current {
+	background-color: #00ccff;
+	border-color: #00ccff;
+	color: #FFFFFF;
+}
+
+.totalPages {
+	margin: 0 10px;
+}
+
+.totalPages span,
+.totalSize span {
+	color: #00ccff;
+	margin: 0 5px;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="expires" content="-1"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <title>GDW-区块链浏览器</title>
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="container">
+<div class="commonhead">
+    <div class="commonheadtitle">
+        <div class="commonheadlogo">
+            <img src="img/logo2.png"/>
+        </div>
+        <a href="/"><div class="zhuye noactive">首页</div></a>
+        <a href="/contract"><div class="zhuye noactive">合约</div></a>
+        <div class="zhongwen"></div>
+    </div>
+</div>
+<div class="commonmain">
+    <div class="contentmain">
+<!--         <div class="tradeidtable" style="padding-left:5%;height:60px;">
+            <table width="100%">
+                <tr style="line-height: 50px;">
+                    <td width="5%" class="ywzt">交易ID:</td>
+                    <td width="30%" id="contractId" class="boldtr" th:text="${trx.trxId}"></td>
+                    <td width="65%"></td>
+                </tr>
+            </table>
+        </div> -->
+        <div class="tradedetailtable">
+            <div class="box_q">
+                <p class="ywzt">交易ID:<span  class="boldtr" id="contractId" th:text="${trx.trxId}"></span></p>
+            </div>
+            <table width="100%">
+                <thead>
+                <tr class="theadbg mainpagetheadbg" >
+                    <th>交易信息</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td width="10%"><h3>发起方</h3></td>
+                    <td width="40%" th:text="${trx.fromAccount}"></td>
+                    <td width="10%"><h3>接收方</h3></td>
+                    <td width="40%" th:text="${trx.toAccount}"></td>
+                </tr>
+                <tr class="trbg">
+                    <td><h3>区块高度</h3></td>
+                    <td><a th:href="@{blockNum.do(blockNum=${trx.blockNum})}" th:text="${trx.blockNum}"></a></td>
+                    <td><h3>合约ID</h3></td>
+                    <td th:text="${trx.toAccount}"></td>
+                </tr>
+                <tr>
+                    <td><h3>交易金额</h3></td>
+                    <td><span th:text="${trx.amountStr}"></span></td>
+                    <td><h3>交易类型</h3></td>
+                    <td th:text="${trx.trxTypeStr}"></td>
+                </tr>
+                <tr class="trbg">
+                    <td><h3>手续费</h3></td>
+                    <td><span th:text="${trx.feeStr}"></span></td>
+                    <td><h3>备注</h3></td>
+                    <td th:text="${trx.memo}"></td>
+                </tr>
+                <tr>
+                    <td><h3>交易结果</h3></td>
+                    <td th:switch="${trx.isCompleted}">
+                        <p th:case="1">已完成</p>
+                        <p th:case="0">未完成</p>
+                    </td>
+                    <td><h3>确认时间</h3></td>
+                    <td th:text="${trx.trxTimeStr}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="txtra" th:if="${not #lists.isEmpty(trx.transactionExList)}">
+            <div class="tradedetailtable">
+                <div class="box_q" style="padding:20px">
+                    <span class="ywzt" >交易列表：</span>
+                </div>
+                <table width="100%">
+                    <thead>
+                    <tr class="mainpagetheadbg">
+                        <th width="30%">发起方</th>
+                        <th width="30%">接收方</th>
+                        <th width="30%">交易金额</th>
+                    </tr>
+                    </thead>
+                    <tbody id="transactions" th:each="summary:${trx.transactionExList}">
+                    <tr>
+                        <td width="30%" th:text="${summary.fromAddr}"></td>
+                        <td width="30%" th:text="${summary.toAddr}"></td>
+                        <td width="30%"><span th:text="${summary.amountStr}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="page"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!--底部-->
+<div class="footer">
+    <div class="content">
+    <div class="row" style="    padding: 2.5em 0;">
+        <div class="col-md-6 col-xs-12">
+            <div class="row">
+                <div class="col-md-4 col-xs-6"><img src="img/cn.png" alt="" /><a href="https://t.me/GDW2018" target="_blank">中文电报群</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/Twitter.png" alt="" /><a href="https://twitter.com/goldenworld2018" target="_blank">Twitter</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/ghihub.png" alt="" /><a href="https://github.com/GDW2018" target="_blank">Github</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/en.png" alt="" /><a href="https://t.me/GoldenWorld2018" target="_blank">英文电报群</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/Facebook.png" alt="" /><a href="https://www.facebook.com/goldenworld2018" target="_blank">Facebook</a></div>
+                <div class="col-md-4 col-xs-6"><img src="img/xing.png" alt="" /><a href="https://t.zsxq.com/QBE6U7Q" target="_blank">知识星球</a></div>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <ul>
+                <li><img src="img/kf.png" alt="" /><span>GDW官方客服微信</span></li>
+                <li><img src="img/gz.png" alt="" /><span>GDW官方微信公众号</span></li>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+        <div class="clear"></div> 
+        <p>版權©2018  GOLDEN WORLD FOUNDATIONA，版權所有</p>
+    </div>
+</div>
+<script type="text/javascript" src="ui/amaze/js/jquery.min.js"></script>
+<script type="text/javascript" src="js/paging.js"></script>
+</body>
+</html>

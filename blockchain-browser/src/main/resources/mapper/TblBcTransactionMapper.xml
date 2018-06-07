@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblBcTransactionMapper" >
+  <resultMap id="transactionResult" type="com.browser.dao.entity.TblBcTransaction" >
+    <id column="trx_id" property="trxId" jdbcType="VARCHAR" />
+    <result column="block_id" property="blockId" jdbcType="VARCHAR" />
+    <result column="block_num" property="blockNum" jdbcType="BIGINT" />
+    <result column="from_account" property="fromAccount" jdbcType="VARCHAR" />
+    <result column="from_account_name" property="fromAccountName" jdbcType="VARCHAR" />
+    <result column="to_account" property="toAccount" jdbcType="VARCHAR" />
+    <result column="to_account_name" property="toAccountName" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="fee" property="fee" jdbcType="BIGINT" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="trx_time" property="trxTime" jdbcType="TIMESTAMP" />
+    <result column="trx_time_str" property="trxTimeStr" jdbcType="TIMESTAMP" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="deleted_at" property="deletedAt" jdbcType="TIMESTAMP" />
+
+    <result column="called_abi" property="calledAbi" jdbcType="VARCHAR" />
+    <result column="abi_params" property="abiParams" jdbcType="VARCHAR" />
+    <result column="extra_trx_id" property="extraTrxId" jdbcType="VARCHAR" />
+    <result column="is_completed" property="isCompleted" jdbcType="INTEGER" />
+    <result column="trx_type" property="trxType" jdbcType="INTEGER" />
+    <result column="asset_id" property="assetId" jdbcType="INTEGER" />
+
+    <result column="signee" property="signee" jdbcType="VARCHAR" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    trx_id, block_id, block_num, from_account,from_account_name, to_account,to_account_name, amount, fee, memo, trx_time,
+    called_abi,abi_params,extra_trx_id,is_completed,trx_type,asset_id,contract_id
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="transactionResult" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bc_transaction
+    where trx_id = #{trxId,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 通过交易Id查询交易信息 -->
+  <select id="queryByTrxId" resultMap="transactionResult" parameterType="java.lang.String">
+  	SELECT
+	a.trx_id AS trx_id,
+	a.block_id AS block_id,
+	a.block_num AS block_num,
+	a.from_account AS from_account,
+	a.from_account_name AS from_account_name,
+	a.to_account AS to_account,
+	a.to_account_name AS to_account_name,
+	a.amount AS amount,
+	a.fee AS fee,
+	a.memo AS memo,
+	a.trx_time AS trx_time,
+	DATE_FORMAT(trx_time, '%Y-%m-%d %H:%i:%S') as trx_time_str,
+	a.trx_type AS trx_type,
+	a.is_completed AS is_completed,
+	a.called_abi AS called_abi,
+	a.abi_params AS abi_params,
+	a.extra_trx_id AS extra_trx_id,
+	a.asset_id AS asset_id,
+	a.contract_id AS contract_id,
+	b.signee AS signee
+	FROM tbl_bc_transaction a
+	LEFT JOIN tbl_bc_block b ON a.block_id = b.block_id
+	WHERE trx_id = #{trxId}
+  </select>
+  
+  <!-- 查询最新的6条交易数据 -->
+  <select id="selectByTrxData" resultMap="transactionResult">
+  	SELECT 
+    a.trx_id AS trxId,
+	a.block_id AS blockId,
+	a.block_num AS blockNum,
+	a.from_account AS fromAccount,
+	a.from_account_name AS fromAccountName,
+	a.to_account AS toAccount,
+	a.to_account_name AS toAccountName,
+	a.amount AS amount,
+	a.fee AS fee,
+	a.memo AS memo,
+	a.trx_time AS trxTime,
+	a.trx_type AS trx_type,
+	a.is_completed AS is_completed,
+	a.called_abi AS called_abi,
+	a.abi_params AS abi_params,
+	a.extra_trx_id AS extra_trx_id,
+	a.asset_id AS asset_id,
+	a.contract_id AS contract_id,
+	b.signee AS signee
+  	FROM tbl_bc_transaction a
+  	LEFT JOIN tbl_bc_block b on a.block_id = b.block_id 
+  	ORDER BY a.trx_time DESC LIMIT 0,6
+  </select>
+  
+  <!--根据快ID查询交易信息 -->
+  <select id="selectByBlockId" resultMap="transactionResult" parameterType="java.lang.String">
+  	SELECT 
+    <include refid="Base_Column_List" />
+  	FROM tbl_bc_transaction a
+  	WHERE a.block_id = #{blockId}
+  	ORDER BY a.trx_time DESC 
+  </select>
+  
+  <!-- 统计交易额 -->
+  <select id="selectByAmountNum" resultType="java.lang.Long">
+  	SELECT SUM(a.amount) AS num FROM tbl_bc_transaction a where fee>=0
+  </select>
+  
+  <!-- 统计交易手续费 -->
+  <select id="selectByFee" resultType="java.lang.Long">
+  	SELECT SUM(a.fee) AS num FROM tbl_bc_transaction a where fee>=0
+  </select>
+  
+  <!-- 统计交易数量 -->
+  <select id="selectByNum" resultType="java.lang.Integer">
+  	SELECT COUNT(a.trx_id) AS num FROM tbl_bc_transaction a
+  </select>
+  
+  <!-- 查询上一个小时的交易量 -->
+  <select id="selectHour" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select COUNT(a.trx_id) AS num from tbl_bc_transaction a 
+	where DATE_FORMAT(a.trx_time,"%Y-%m-%d %H") = #{time}
+  </select>
+   
+  <!-- 查询每小时交易峰值 -->
+  <select id="selectAll" resultType="java.lang.Integer">
+  	select MAX(b.num) AS num from (
+	select COUNT(a.trx_id) AS num from tbl_bc_transaction a 
+	GROUP BY DATE_FORMAT(a.trx_time,"%Y-%m-%d %H") ) b
+  </select>
+   
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tbl_bc_transaction
+    where trx_id = #{trxId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.browser.dao.entity.TblBcTransaction" >
+    insert into tbl_bc_transaction (trx_id, block_id, block_num, 
+      from_account, to_account, amount, 
+      fee, memo, trx_time,created_at, updated_at, deleted_at,
+      called_abi,abi_params,extra_trx_id,is_completed,trx_type,asset_id,contract_id
+      )
+    values (#{trxId,jdbcType=VARCHAR}, #{blockId,jdbcType=VARCHAR}, #{blockNum,jdbcType=BIGINT}, 
+      #{fromAccount,jdbcType=VARCHAR}, #{toAccount,jdbcType=VARCHAR}, #{amount,jdbcType=BIGINT}, 
+      #{fee,jdbcType=BIGINT}, #{memo,jdbcType=VARCHAR}, #{trxTime,jdbcType=TIMESTAMP}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deletedAt,jdbcType=TIMESTAMP},
+      #{calledAbi,jdbcType=VARCHAR}, #{abiParams,jdbcType=VARCHAR}, #{extraTrxId,jdbcType=VARCHAR}, #{isCompleted,jdbcType=INTEGER},
+      #{trxType,jdbcType=INTEGER},#{assetId,jdbcType=INTEGER}, #{contractId,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tbl_bc_transaction (trx_id, block_id, block_num,
+    from_account, to_account, amount,
+    fee, memo, trx_time,
+    created_at, updated_at, deleted_at,
+    called_abi,abi_params,extra_trx_id,is_completed,trx_type,asset_id,contract_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.trxId,jdbcType=VARCHAR}, #{item.blockId,jdbcType=VARCHAR}, #{item.blockNum,jdbcType=BIGINT},
+      #{item.fromAccount,jdbcType=VARCHAR}, #{item.toAccount,jdbcType=VARCHAR}, #{item.amount,jdbcType=BIGINT},
+      #{item.fee,jdbcType=BIGINT}, #{item.memo,jdbcType=VARCHAR}, #{item.trxTime,jdbcType=TIMESTAMP},
+      #{item.createdAt,jdbcType=TIMESTAMP}, #{item.updatedAt,jdbcType=TIMESTAMP}, #{item.deletedAt,jdbcType=TIMESTAMP},
+      #{item.calledAbi,jdbcType=VARCHAR}, #{item.abiParams,jdbcType=VARCHAR}, #{item.extraTrxId,jdbcType=VARCHAR}, #{item.isCompleted,jdbcType=INTEGER},
+      #{item.trxType,jdbcType=INTEGER},#{item.assetId,jdbcType=INTEGER}, #{item.contractId,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblBcTransaction" >
+    insert into tbl_bc_transaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trxId != null" >
+        trx_id,
+      </if>
+      <if test="blockId != null" >
+        block_id,
+      </if>
+      <if test="blockNum != null" >
+        block_num,
+      </if>
+      <if test="fromAccount != null" >
+        from_account,
+      </if>
+      <if test="toAccount != null" >
+        to_account,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="fee != null" >
+        fee,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="confirmTime != null" >
+        trx_time,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at,
+      </if>
+      <if test="calledAbi != null" >
+        called_abi,
+      </if>
+      <if test="abiParams != null" >
+        abi_params,
+      </if>
+      <if test="extraTrxId != null" >
+        extra_trx_id,
+      </if>
+      <if test="isCompleted != null" >
+        is_completed,
+      </if>
+      <if test="trxType != null" >
+        trx_type,
+      </if>
+      <if test="assetId != null" >
+        asset_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trxId != null" >
+        #{trxId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockId != null" >
+        #{blockId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        #{blockNum,jdbcType=BIGINT},
+      </if>
+      <if test="fromAccount != null" >
+        #{fromAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="toAccount != null" >
+        #{toAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmTime != null" >
+        #{trxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="calledAbi != null" >
+        #{calledAbi,jdbcType=VARCHAR},
+      </if>
+      <if test="abiParams != null" >
+        #{abiParams,jdbcType=VARCHAR},
+      </if>
+      <if test="extraTrxId != null" >
+        #{extraTrxId,jdbcType=VARCHAR},
+      </if>
+      <if test="isCompleted != null" >
+        #{isCompleted,jdbcType=INTEGER},
+      </if>
+      <if test="trxType != null" >
+        #{trxType,jdbcType=INTEGER},
+      </if>
+      <if test="assetId != null" >
+        #{assetId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblBcTransaction" >
+    update tbl_bc_transaction
+    <set >
+      <if test="blockId != null" >
+        block_id = #{blockId,jdbcType=VARCHAR},
+      </if>
+      <if test="blockNum != null" >
+        block_num = #{blockNum,jdbcType=BIGINT},
+      </if>
+      <if test="fromAccount != null" >
+        from_account = #{fromAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="toAccount != null" >
+        to_account = #{toAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="fee != null" >
+        fee = #{fee,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmTime != null" >
+        trx_time = #{trxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="calledAbi != null" >
+        called_abi = #{calledAbi,jdbcType=VARCHAR},
+      </if>
+      <if test="abiParams != null" >
+        abi_params = #{abiParams,jdbcType=VARCHAR},
+      </if>
+      <if test="extraTrxId != null" >
+        extra_trx_id = #{extraTrxId,jdbcType=INTEGER},
+      </if>
+      <if test="isCompleted != null" >
+        is_completed = #{isCompleted,jdbcType=INTEGER},
+      </if>
+      <if test="trxType != null" >
+        trx_type = #{trxType,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null" >
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where trx_id = #{trxId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblBcTransaction" >
+    update tbl_bc_transaction
+    set block_id = #{blockId,jdbcType=VARCHAR},
+      block_num = #{blockNum,jdbcType=BIGINT},
+      from_account = #{fromAccount,jdbcType=VARCHAR},
+      to_account = #{toAccount,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      fee = #{fee,jdbcType=BIGINT},
+      memo = #{memo,jdbcType=VARCHAR},
+      trx_time = #{trxTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      called_abi = #{calledAbi,jdbcType=VARCHAR},
+      abi_params = #{abiParams,jdbcType=VARCHAR},
+      extra_trx_id = #{extraTrxId,jdbcType=INTEGER},
+      is_completed = #{isCompleted,jdbcType=INTEGER},
+      trx_type = #{trxType,jdbcType=VARCHAR},
+      asset_id = #{assetId,jdbcType=VARCHAR}
+    where trx_id = #{trxId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getTransactionList" resultMap="transactionResult" parameterType="com.browser.dao.entity.TblBcTransaction">
+    SELECT
+    <include refid="Base_Column_List" />,DATE_FORMAT(trx_time, '%Y-%m-%d %H:%i:%S') as trx_time_str
+    FROM tbl_bc_transaction
+    WHERE from_account = #{fromAccount,jdbcType=VARCHAR} or to_account = #{toAccount,jdbcType=VARCHAR}
+    order by trx_time desc
+  </select>
+
+  <delete id="deleteByBlockNum" parameterType="java.lang.Long" >
+    delete from tbl_bc_transaction
+    where block_num = #{blockNum,jdbcType=BIGINT}
+  </delete>
+
+  <select id="queryContractTrx" resultMap="transactionResult" parameterType="com.browser.dao.entity.TblBcTransaction">
+    SELECT
+    <include refid="Base_Column_List" />,DATE_FORMAT(trx_time, '%Y-%m-%d %H:%i:%S') as trx_time_str
+    FROM tbl_bc_transaction
+    WHERE from_account = #{fromAccount,jdbcType=VARCHAR} and trx_type>0 and contract_id=#{contractId,jdbcType=VARCHAR}
+  </select>
+</mapper>

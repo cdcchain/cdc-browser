@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblBcConfigureMapper" >
+  <resultMap id="BaseResultMap" type="com.browser.dao.entity.TblBcConfigure" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="conf_key" property="confKey" jdbcType="VARCHAR" />
+    <result column="conf_value" property="confValue" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="deleted_at" property="deletedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, conf_key, conf_value, created_at, updated_at, deleted_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bc_configure
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+    <!-- 查询快表是否有数据 -->
+  <select id="selectByCount" resultType="java.lang.Integer">
+  	SELECT COUNT(a.block_id) AS num FROM tbl_bc_configure a
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_bc_configure
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.browser.dao.entity.TblBcConfigure" >
+    insert into tbl_bc_configure (id, conf_key, conf_value, 
+      created_at, updated_at, deleted_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{confKey,jdbcType=VARCHAR}, #{confValue,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deletedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into tbl_bc_configure (id, conf_key, conf_value,
+    created_at, updated_at, deleted_at
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{id,jdbcType=BIGINT}, #{confKey,jdbcType=VARCHAR}, #{confValue,jdbcType=VARCHAR},
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deletedAt,jdbcType=TIMESTAMP}
+      )
+    </foreach>
+  </insert>
+
+  
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblBcConfigure" >
+    insert into tbl_bc_configure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="confKey != null" >
+        conf_key,
+      </if>
+      <if test="confValue != null" >
+        conf_value,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="confKey != null" >
+        #{confKey,jdbcType=VARCHAR},
+      </if>
+      <if test="confValue != null" >
+        #{confValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblBcConfigure" >
+    update tbl_bc_configure
+    <set >
+      <if test="confKey != null" >
+        conf_key = #{confKey,jdbcType=VARCHAR},
+      </if>
+      <if test="confValue != null" >
+        conf_value = #{confValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblBcConfigure" >
+    update tbl_bc_configure
+    set conf_key = #{confKey,jdbcType=VARCHAR},
+      conf_value = #{confValue,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

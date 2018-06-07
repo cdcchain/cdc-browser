@@ -1,0 +1,84 @@
+.leftsolid{
+	border-left: 2px solid #CCCCCC;
+}
+
+/*.mainpagetheadbg{
+	background-color: #e1e6f2;
+	height: 40px;
+	width: 100%;
+	text-align:left;
+	font-size: 95%; 
+	font-family: '微软雅黑'; 
+	font-weight: bold;
+}*/
+
+/*.mainpagetheadbg th{
+	padding-left: 10px;
+}
+*/
+.searcharea
+{
+	float: left;
+}
+
+/*
+  * 外面盒子样式---自己定义
+  */
+
+
+/*
+ * 页数按钮样式
+ */
+
+.page_div a {
+	min-width:28px;
+	height:28px;
+	text-align: center;
+	margin: 0 4px;
+	cursor: pointer;
+	line-height: 26px;
+	color: #666666;
+	font-size: 12px;
+	display: inline-block;
+	border: 1px solid #ebebeb;
+}
+.page_div a:hover{
+	color: #32bfc9;
+	border: 1px solid #32bfc9;
+}
+
+
+#firstPage,
+#lastPage {
+	width: 50px;
+	color: #32bfc9;
+	border: 1px solid #32bfc9!important;
+}
+
+#prePage,
+#nextPage {
+	width: 28px;
+	height:28px;
+	color: #32bfc9;
+	border: 1px solid #ebebeb;
+}
+#prePage img,
+#nextPage img{
+	    vertical-align:text-bottom;
+}
+
+.page_div .current,.page_div .current:hover{
+	background-color: #32bfc9;
+	color: #FFFFFF;
+	border:none;
+}
+
+.totalPages {
+	margin: 0 10px;
+}
+
+.totalPages span,
+.totalSize span {
+	color: #32bfc9;
+	margin: 0 5px;
+}

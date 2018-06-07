@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="expires" content="-1"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <title>CDC-区块链浏览器</title>
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/mainpage.css" />
+</head>
+<body class="container">
+<div class="commonhead">
+    <div class="commonheadtitle">
+        <div class="commonheadlogo">
+            <img src="img/logo.png"/>
+        </div>
+        <a href="/"><div class="zhuye noactive">首页</div></a>
+        <a href="/contract"><div class="zhuye noactive">合约</div></a>
+        <div class="zhongwen"></div>
+    </div>
+</div>
+<div class="commonmain">
+    <div class="contentmain">
+        <div class="tradeidtable" style="padding-left:5%;height:60px;">
+            <table width="100%">
+                <tr style="line-height: 50px;">
+                    <td width="5%" class="ywzt">合约ID:</td>
+                    <td width="30%" id="contractId" class="boldtr" th:text="${contractInfo.contractId}"></td>
+                    <td width="65%"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="tradedetailtable">
+            <table width="100%">
+                <thead>
+                <tr class="theadbg" style="height:43px">
+                    <th style="font-family: 'SimHei'; float: left; padding-top: 12px;">合约信息概览</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td width="10%"><h3>合约名称</h3></td>
+                    <td width="40%" th:text="${contractInfo.name}"></td>
+                    <td width="10%"><h3>合约状态</h3></td>
+                    <td width="40%" th:text="${contractInfo.statusStr}"></td>
+                </tr>
+                <tr class="trbg">
+                    <td><h3>合约所有者</h3></td>
+                    <td th:text="${contractInfo.ownerAddress}"></td>
+                    <td><h3>合约余额</h3></td>
+                    <td><span th:text="${contractInfo.balanceStr}"></span></td>
+                </tr>
+                <tr>
+                    <td><h3>字节码hash</h3></td>
+                    <td><span th:text="${contractInfo.hash}"></span></td>
+                    <td style="width:15%"><h3>合约描述</h3></td>
+                    <td th:text="${contractInfo.description}"></td>
+                </tr>
+                <tr class="trbg">
+                    <td><h3>合约ID</h3></td>
+                    <td th:text="${contractInfo.contractId}"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><h3>函数</h3></td>
+                    <td>
+                        <div th:each="summary:${contractInfo.abiList}">
+                           <p  th:text="${summary.abiName}" style="padding: 0.2rem;"></p>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="trbg">
+                    <td><h3>注册时间</h3></td>
+                    <td th:text="${contractInfo.regTimeStr}"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="width: 100%; margin-top: 30px;margin-left: 10%">
+            <strong>交易列表：</strong>
+        </div>
+        <div class="tradedetailtable">
+            <table width="100%">
+                <thead>
+                <tr class="mainpagetheadbg">
+                    <th width="30%">交易id</th>
+                    <th width="30%">交易类型</th>
+                    <th width="30%">交易金额</th>
+                    <th width="10%">时间</th>
+                </tr>
+                </thead>
+                <tbody id="transactions">
+                </tbody>
+            </table>
+        </div>
+        <div id="page" class="page_div"></div>
+    </div>
+</div>
+<script type="text/javascript" src="ui/amaze/js/jquery.min.js"></script>
+<script type="text/javascript" src="js/paging.js"></script>
+<script type="text/javascript" src="js/contractDetail.js"></script>
+</body>
+</html>

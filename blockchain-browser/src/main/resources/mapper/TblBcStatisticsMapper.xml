@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.browser.dao.mapper.TblBcStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.browser.dao.entity.TblBcStatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="trx_count" property="trxCount" jdbcType="INTEGER" />
+    <result column="all_trx_amount" property="allTrxAmount" jdbcType="DECIMAL" />
+    <result column="all_trx_fee" property="allTrxFee" jdbcType="DECIMAL" />
+    <result column="trx_latest_hour" property="trxLatestHour" jdbcType="INTEGER" />
+    <result column="trx_max_hour" property="trxMaxHour" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="deleted_at" property="deletedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, trx_count, all_trx_amount, all_trx_fee, trx_latest_hour, trx_max_hour, created_at, 
+    updated_at, deleted_at
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_bc_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    
+  <!-- 查询统计表是否有数据 -->
+  <select id="selectByCount" resultType="java.lang.Integer">
+  	SELECT COUNT(a.id) AS num FROM tbl_bc_statistics a
+  </select>
+  
+  <!-- 更新统计信息 -->
+  <update id="updateByStatic" parameterType="com.browser.dao.entity.TblBcStatistics">
+  	update tbl_bc_statistics
+     set trx_count = #{trxCount} ,
+      all_trx_amount =  #{allTrxAmount,jdbcType=DECIMAL},
+      all_trx_fee =  #{allTrxFee,jdbcType=DECIMAL},
+      trx_latest_hour =  #{trxLatestHour,jdbcType=INTEGER},
+      trx_max_hour =  #{trxMaxHour,jdbcType=INTEGER}
+    where id = 100
+  </update>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_bc_statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.browser.dao.entity.TblBcStatistics" >
+    insert into tbl_bc_statistics (id, trx_count, all_trx_amount, 
+      all_trx_fee, trx_latest_hour, trx_max_hour, 
+      created_at, updated_at, deleted_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{trxCount,jdbcType=INTEGER}, #{allTrxAmount,jdbcType=DECIMAL}, 
+      #{allTrxFee,jdbcType=DECIMAL}, #{trxLatestHour,jdbcType=INTEGER}, #{trxMaxHour,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deletedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.browser.dao.entity.TblBcStatistics" >
+    insert into tbl_bc_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trxCount != null" >
+        trx_count,
+      </if>
+      <if test="allTrxAmount != null" >
+        all_trx_amount,
+      </if>
+      <if test="allTrxFee != null" >
+        all_trx_fee,
+      </if>
+      <if test="trxLatestHour != null" >
+        trx_latest_hour,
+      </if>
+      <if test="trxMaxHour != null" >
+        trx_max_hour,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="trxCount != null" >
+        #{trxCount,jdbcType=INTEGER},
+      </if>
+      <if test="allTrxAmount != null" >
+        #{allTrxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="allTrxFee != null" >
+        #{allTrxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="trxLatestHour != null" >
+        #{trxLatestHour,jdbcType=INTEGER},
+      </if>
+      <if test="trxMaxHour != null" >
+        #{trxMaxHour,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.browser.dao.entity.TblBcStatistics" >
+    update tbl_bc_statistics
+    <set >
+      <if test="trxCount != null" >
+        trx_count = #{trxCount,jdbcType=INTEGER},
+      </if>
+      <if test="allTrxAmount != null" >
+        all_trx_amount = #{allTrxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="allTrxFee != null" >
+        all_trx_fee = #{allTrxFee,jdbcType=DECIMAL},
+      </if>
+      <if test="trxLatestHour != null" >
+        trx_latest_hour = #{trxLatestHour,jdbcType=INTEGER},
+      </if>
+      <if test="trxMaxHour != null" >
+        trx_max_hour = #{trxMaxHour,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null" >
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = 100
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.browser.dao.entity.TblBcStatistics" >
+    update tbl_bc_statistics
+    set trx_count = trx_count + 1,
+      all_trx_amount = all_trx_amount + #{allTrxAmount,jdbcType=DECIMAL},
+      all_trx_fee = all_trx_fee + #{allTrxFee,jdbcType=DECIMAL},
+      trx_latest_hour = trx_latest_hour + #{trxLatestHour,jdbcType=INTEGER},
+      trx_max_hour = trx_max_hour + #{trxMaxHour,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

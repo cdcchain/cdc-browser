@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+		        content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="format-detection" content="telephone=no"/>
+		<meta http-equiv="expires" content="-1"/>
+		<meta http-equiv="pragma" content="no-cache"/>
+		<meta http-equiv="cache-control" content="no-cache"/>
+		<title>CDC-区块链浏览器</title>
+		<link rel="shortcut icon" href="favicon.png" />
+		<link rel="stylesheet" href="css/common.css" />
+	</head>
+	<body class="container">
+		<div class="commonhead">
+			<div class="commonheadtitle">
+				<div class="commonheadlogo">
+					<img src="img/logo.png"/>
+				</div>
+				<a href="/"><div class="zhuye noactive">首页</div></a>
+				<a href="/contract"><div class="zhuye noactive">合约</div></a>
+				<div class="zhongwen"></div>
+			</div>
+		</div>
+		<div class="commonmain">
+			<div class="contentmain">
+				<div style="height: 50px; width: 100%;padding-left:10%">
+					<div class="tradedetail">交易详情</div>	
+				</div>
+				<div class="tradeidtable" style="padding-left:5%">
+					<table width="100%">
+						<tr style="line-height: 50px;">
+							<td width="100%" class="ywzt">id:&nbsp;<span class="boldtr" th:text="${trx.trxId}"></span></td>
+						</tr>
+					</table>
+				</div>
+				<div class="tradedetailtable">
+					<table width="100%"> 	
+						<thead>
+							<tr class="theadbg" style="height:40px">
+      							<th style="font-family: 'SimHei'; float: left; padding-top: 12px; padding-left: 10px;">交易概况</th>
+    							<th></th>
+    							<th></th>
+    							<th></th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr>
+							    <td width="10%">发起方</td>
+							    <td width="40%"><span th:text="${trx.fromAccount}" ></span></td>
+							    <td width="10%">接收方</td>
+							    <td width="40%"><span th:text="${trx.toAccount}" ></span></td>
+						    </tr>
+							<tr class="trbg">
+								<td width="10%">交易金额</td>
+								<td width="40%"><span th:text="${trx.amountStr}" ></span></td>
+								<td width="10%">手续费</td>
+								<td width="40%"><span th:text="${trx.feeStr}" ></span></td>
+							</tr>
+							<tr>
+								<td>区块数</td>
+								<td><a th:href="@{blockNum.do(blockNum=${trx.blockNum})}" th:text="${trx.blockNum}"></a></td>
+								<td>打包代理</td>
+								<td th:text="${trx.signee}"></td>
+							</tr>
+							<tr class="trbg">
+								<td>确认时间</td>
+								<td th:text="${trx.trxTimeStr}"></td>
+								<td>备注</td>
+								<td th:text="${trx.memo}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="ui/amaze/js/jquery.min.js"></script>
+	</body>
+</html>
