@@ -8,7 +8,7 @@ function hrefContractDetail(contractId) {
 
 function loadTransaction(pageno) {
     var keyword = $("#formInput").val();
-    if(keyword == "  合约名称、合约ID"){
+    if(keyword == "  合约名称 / 合约ID"){
         keyword="";
     }
     $.ajax({
@@ -76,7 +76,7 @@ function tipWord(jQueryRule,defaultWord,preColor,afterColor){
 }
 
 $(document).ready(function () {
-    tipWord("#formInput", "  合约名称、合约ID", "rgb(227,233,247)", "rgb(255, 255, 255)");
+    tipWord("#formInput", "  合约名称 / 合约ID", "rgb(105,105,105)", "rgb(0,0,0)");
     //初始页查询
     loadTransaction(1);
 });

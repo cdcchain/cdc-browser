@@ -1,9 +1,9 @@
 .leftsolid{
-	border-left: 2px solid #CCCCCC;
+	border-left: 1px solid #C0C0C0;
 }
 
 .mainpagetheadbg{
-	background-color: #e1e6f2;
+	background-color: #000000;
 	height: 40px;
 	width: 100%;
 	text-align:left;
@@ -31,7 +31,7 @@
 	font-size: 15px;
 	font-family: "microsoft yahei";
 	color: #666666;
-	margin-right: 10px;
+	margin-right: 15%;
 	padding-left: 20px;
 	box-sizing: border-box;
 	text-align: right;

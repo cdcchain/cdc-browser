@@ -16,31 +16,42 @@
 				<div class="commonheadlogo">
 					<img src="img/logo.png"/>
 				</div>
-				<a href="/"><div class="zhuye active">首页</div></a>
-				<a href="/contract"><div class="zhuye noactive">合约</div></a>
+				<a href="/">
+					<div class="zhuye">
+						<strong>首页</strong>
+						<div class="sign"></div>
+					</div>
+				</a>
+				<a href="/contract"><div class="zhuye"><strong>合约</strong></div></a>
 				<div class="search-div">
 					<form action="" method="get">
 						<div class="kuan"><input name="" id="formInput" type="text" /></div>
-						<span style="background-image: url(img/search1.png);float: left;height:40px;width:40px;
-						margin-left:60px;margin-top:8px;cursor:pointer" onclick="search();"></span>
+						<span style="background-image: url(img/search1.png);float: left;height:20px;width:20px;
+						margin-left:40px;margin-top:8px;cursor:pointer" onclick="search();"></span>
 					</form>
 				</div>
-				<div class="zhongwen"></div>
 				
 			</div>
 		</div>
 		<div class="commonmain">
 			<div class="contentmain">
-				<div class="tradeidtable" style="width: 100%;height:100px; text-align: center; font-family: '微软雅黑';">
-					<table width="100%">
-						<tr style="line-height: 50px; font-size: 90%;">
+				<div class="tradeidtable" style="width: 100%;height:200px; text-align: center; font-family: '微软雅黑';background-color:#000000;padding-top:70px;">
+					<table style="width: 70%;margin-left: 15%;">
+						<tr style="line-height: 16px; font-size: 90%;color: #FFFFFF">
 							<td width="20%">交易总量</td>
 							<td width="20%" class="leftsolid">总交易金额</td>
 							<td width="20%" class="leftsolid">总手续费</td>
 							<td width="20%" class="leftsolid">当前一小时交易量</td>
-							<td width="20%" class="leftsolid">交易峰值每小时</td>
+							<td width="20%" class="leftsolid">交易峰值 / 小时</td>
 						</tr>
-						<tr class="text-blue">
+						<tr style="line-height: 16px;">
+							<td width="20%"></td>
+							<td width="20%" class="leftsolid">&nbsp;</td>
+							<td width="20%" class="leftsolid">&nbsp;</td>
+							<td width="20%" class="leftsolid">&nbsp;</td>
+							<td width="20%" class="leftsolid">&nbsp;</td>
+						</tr>
+						<tr class="text-green" style="line-height: 24px;font-size: 24px;">
 							<td id="transCount">0</td>
 							<td id="transAmount" class="leftsolid">0</td>
 							<td id="transFee" class="leftsolid">0.00</td>
@@ -49,16 +60,17 @@
 						</tr>
 					</table>
 				</div>
-				<div class="tradedetailtable">
+				<div style="width:100%;background-color:#f1f1f2;padding-top:40px;">
+				<div class="tradedetailtable" >
 					<table width="100%">
 						<thead>
-							<tr class="mainpagetheadbg">
-      							<th width="16.6%">高度</th>
-    							<th width="16.6%">时间</th>
-    							<th width="16.6%">交易数</th>
-    							<th width="16.6%">交易额</th>
-    							<th width="16.6%">产块代理</th>
-    							<th width="16.6%">大小 (Byte)</th>
+							<tr class="mainpagetheadbg" style="background-color: #000000">
+      							<th width="16.6%" class="text-white">高度</th>
+    							<th width="16.6%" class="text-white">时间</th>
+    							<th width="16.6%" class="text-white">交易数</th>
+    							<th width="16.6%" class="text-white">交易额(CDC)</th>
+    							<th width="16.6%" class="text-white">产块代理</th>
+    							<th width="16.6%" class="text-white">大小 (Byte)</th>
 							</tr>
 						</thead>
 						<tbody id="blocks">
@@ -70,8 +82,8 @@
 				<div class="tradedetailtable" style="min-height: 400px;">
 					<table width="100%" style="float: left;">
 						<thead>
-							<tr class="mainpagetheadbg">
-      							<th width="40%">最近交易记录</th>
+							<tr class="mainpagetheadbg" style="background-color: #000000">
+      							<th width="40%"  class="text-white">最近交易记录</th>
     							<th width="40%"></th>
     							<th width="20%"></th>
 							</tr>
@@ -81,6 +93,7 @@
 						</tbody>
 					</table>
  				</div>
+				</div>
 			</div>
 		</div>
 <!--		<div class="commonfoot">

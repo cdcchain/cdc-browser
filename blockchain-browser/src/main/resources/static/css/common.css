@@ -328,41 +328,43 @@ a img {
 .container {
 	margin: 0;
 	padding: 0;
-	padding-bottom:60px;
+	/*padding-bottom:60px;*/
 }
 
 .commonhead {
 	width: 100%;
-	height: 103px;
-	padding-left: 10%;
-	background-color: #293237;
+	height: 94px;
+	padding-left: 15%;
+	padding-right: 15%;
+	/*background-color: #293237;*/
 }
 
 .commonheadtitle {
 	width: 100%;
-	height: 103px;
+	height: 94px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .commonheadlogo {
 	width: 12%;
-	height: 85px;
+	height: 48px;
    /* background-image: url(../img/logo.png);
 	background-repeat: no-repeat;*/
 	float: left;
-	margin-top:10px;
+	margin-top:23px;
 }
 .zhuye{
 	width: 9%;
-	height: 60px;
+	height: 94px;
 	font-size: 20px;
 	float: left;
 	cursor:pointer;
 	margin-left:5%;
-	padding-top: 40px;
+	padding-top: 37px;
 	text-align: center;
 	margin-left: 0;
+	color:#000000;
 }
 .heyue{
 	width:11%;
@@ -384,13 +386,12 @@ a img {
 .commonmain{
 	width: 100%;
 	height: 100%;
-	padding-right:10%;
+	/*padding-right:10%;*/
 }
 
 .contentmain{
 	width: 100%;
-	height: auto;
-	margin-top: 20px;
+	/*height: auto;*/
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -403,10 +404,11 @@ a img {
 }
 
 .tradeidtable{
-	width: 95%;
+	width: 100%;
 	height: 10%;
-	float:right;
-	padding-left:3%
+	/*float:right;*/
+	padding-top: 0;
+	/*padding-left:3%*/
 }
 
 .ywzt{
@@ -427,9 +429,10 @@ a img {
 
 .tradedetailtable
 {
-	width: 100%;
+	width: 70%;
+	margin-left: 15%;
 	height: auto;
-    padding-left:10%  
+    /*padding-left:10%  */
 }
 
 .theadbg{
@@ -452,7 +455,11 @@ a img {
 }
 
 .trbg{
-	background-color:#f5f7fc;
+	 background-color:#e0e9f0;
+ }
+
+.trbg-white{
+	background-color:#ffffff;
 }
 
 .commonfoot{
@@ -478,24 +485,24 @@ a img {
 }
 
 .kuan input{ 
-	width: 75%; 
-	height: 50px; 
+	width: 70%;
+	height: 29px;
 	float: left;
 	border:none;
-	background-color:#293237;
-	color:#fff;
+	/*background-color:#293237;*/
+	color:#696969;
 	margin-left:30px;
 	margin-top: 3px;
 	outline: 0;
 }	
 .search-div {
-    height: 60px;
-    width: 40%;
-    border: 2px solid #ffffff;
+    height: 40px;
+    width: 35%;
+    border: 2px solid #C0C0C0;
     border-radius: 60px 60px 60px 60px;
     float:left;
-    margin-top: 25px;
-    margin-left: 20%;
+    margin-top: 31px;
+    margin-left: 35%;
 }
 .an input{
 	width:40px;
@@ -549,5 +556,21 @@ a img {
 
 .text-blue{
 	color: #00ccff;
+}
+
+.text-green{
+	color: #16bfaf;
+}
+
+.text-white{
+	color: #FFFFFF;
+}
+
+.sign{
+	height:10px;
+	width:40px;
+	text-align: center;
+	background-color:#16bfaf;
+	margin:21px auto 0;
 }
 

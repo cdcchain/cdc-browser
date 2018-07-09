@@ -6,6 +6,7 @@ import com.browser.service.impl.SyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  * 每次同步一个块的定时任务
  */
 @Component
+@ConditionalOnExpression("${task:true}")
 public class SyncTaskSingle {
 
     private static Logger logger = LoggerFactory.getLogger(SyncTaskSingle.class);

@@ -369,7 +369,7 @@ public class StringUtil {
 
 		Date date = DateUtil.parseDate(bc.getString("timestamp"), "yyyy-MM-dd'T'HH:mm:ss");
 		//utc时间转北京时间
-		block.setBlockTime(new Date(date.getTime()+8*60*60*1000L));
+		block.setBlockTime(date);
 		block.setTrxDigest(bc.getString("transaction_digest"));
 		return block;
 	}

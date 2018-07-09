@@ -19,17 +19,20 @@
 				<div class="commonheadlogo">
 					<img src="img/logo.png"/>
 				</div>
-				<a href="/"><div class="zhuye noactive">首页</div></a>
-				<a href="/contract"><div class="zhuye noactive">合约</div></a>
-				<div class="zhongwen"></div>
+				<a href="/">
+					<div class="zhuye">
+						<strong>首页</strong>
+					</div>
+				</a>
+				<a href="/contract"><div class="zhuye"><strong>合约</strong></div></a>
 			</div>
 		</div>
-		<div class="commonmain">
+		<div class="commonmain" >
 			<div class="contentmain">
-				<div style="height: 50px; width: 100%;padding-left:10%">
+				<div style="height: 50px; width: 100%;padding-left:15%">
 					<div class="tradedetail">交易详情</div>	
 				</div>
-				<div class="tradeidtable" style="padding-left:5%">
+				<div class="tradeidtable" style="padding-left:15%">
 					<table width="100%">
 						<tr style="line-height: 50px;">
 							<td width="100%" class="ywzt">id:&nbsp;<span class="boldtr" th:text="${trx.trxId}"></span></td>

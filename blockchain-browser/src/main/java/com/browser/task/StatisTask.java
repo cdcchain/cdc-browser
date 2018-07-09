@@ -5,6 +5,7 @@ import com.browser.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  * Created by mayakui on 2017/9/6 0006.
  */
 @Component
+@ConditionalOnExpression("${task:true}")
 public class StatisTask {
 
     private static Logger logger = LoggerFactory.getLogger(StatisTask.class);

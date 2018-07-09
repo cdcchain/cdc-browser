@@ -102,7 +102,7 @@ function loadBlock() {
             for (var o in data) {
                 var block;
                 if (o % 2 == 0) {
-                    block = $('<tr><td><a onclick="hrefBlock(\''+data[o].blockId+'\')">'+data[o].blockNum+'</a></td><td>'+data[o].blockTimeStr+'</td><td>'+data[o].trxNum+'</td><td>'+data[o].amountStr+'</td><td>'+data[o].signee+'</td><td>'+data[o].blockSize+'</td></tr>');
+                    block = $('<tr class="trbg-white"><td><a onclick="hrefBlock(\''+data[o].blockId+'\')">'+data[o].blockNum+'</a></td><td>'+data[o].blockTimeStr+'</td><td>'+data[o].trxNum+'</td><td>'+data[o].amountStr+'</td><td>'+data[o].signee+'</td><td>'+data[o].blockSize+'</td></tr>');
                 } else {
                     block = $('<tr class="trbg"><td><a onclick="hrefBlock(\''+data[o].blockId+'\')">'+data[o].blockNum+'</a></td><td>'+data[o].blockTimeStr+'</td><td>'+data[o].trxNum+'</td><td>'+data[o].amountStr+'</td><td>'+data[o].signee+'</td><td>'+data[o].blockSize+'</td></tr>');
                 }
@@ -123,7 +123,7 @@ function loadTransaction() {
             for (var o in data) {
                 var transaction;
                 if (o % 2 == 0) {
-                    transaction = $('<tr><td><a onclick="hrefTransaction(\''+data[o].trxId+'\')">'+data[o].trxId+'<a/></td><td>'+data[o].disTime+'</td><td>'+data[o].amountStr+'</td></tr>');
+                    transaction = $('<tr class="trbg-white"><td><a onclick="hrefTransaction(\''+data[o].trxId+'\')">'+data[o].trxId+'<a/></td><td>'+data[o].disTime+'</td><td>'+data[o].amountStr+'</td></tr>');
                 } else {
                     transaction = $('<tr class="trbg"><td><a onclick="hrefTransaction(\''+data[o].trxId+'\')">'+data[o].trxId+'<a/></td><td>'+data[o].disTime+'</td><td>'+data[o].amountStr+'</td></tr>');
                 }
@@ -145,7 +145,7 @@ function timework() {
 
 $(document).ready(function () {
 
-    tipWord("#formInput", " 区块高度、区块哈希、交易ID、地址", "rgb(227,233,247)", "rgb(255, 255, 255)");
+    tipWord("#formInput", " 区块高度 / 区块哈希 / 交易ID / 地址","rgb(105,105,105)", "rgb(0,0,0)");
 
     setInterval(function() {
         timework();
